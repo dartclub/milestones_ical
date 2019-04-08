@@ -4,12 +4,12 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<void> generate(HttpRequest request) async {
+Future<void> milestonesHandler(HttpRequest request) async {
   List<String> parameters = request.requestedUri.path.substring(1).split('/');
-  if (parameters.length == 2) {
+  if (parameters.length == 3) {
     // https://api.github.com/repos/:user/:repo/milestones
     var url =
-        'https://api.github.com/repos/${parameters.first}/${parameters.last}/milestones';
+        'https://api.github.com/repos/${parameters[1]}/${parameters[2]}/milestones';
     var milestones = await http.get(url);
     if (milestones.statusCode == 200) {
       var jsonMilestones = json.decode(milestones.body);
