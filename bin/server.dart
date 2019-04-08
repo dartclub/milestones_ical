@@ -3,8 +3,8 @@ import 'package:appengine/appengine.dart';
 import 'package:milestones_ical/router.dart';
 
 main() async {
-  //await runAppEngine(requestHandler);
-  test();
+  await runAppEngine(requestHandler);
+  //test();
 }
 
 test() async {
