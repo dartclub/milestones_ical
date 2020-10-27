@@ -25,14 +25,16 @@ Future<void> milestonesHandler(HttpRequest request) async {
             'Issues: ${milestone['open_issues']} open / ${milestone['closed_issues']} closed.';
         iCalendar.addElement(
           IEvent(
-              start: start,
-              description: milestone['description'].toString(),
-              comment: comment,
-              summary: title,
-              status: IEventStatus.CONFIRMED,
-              classification: IClass.PUBLIC,
-              uid: milestone['id'].toString(),
-              url: milestone['html_url'].toString()),
+            start: start,
+            description: milestone['description'].toString(),
+            comment: comment,
+            summary: title,
+            status: IEventStatus.CONFIRMED,
+            classification: IClass.PUBLIC,
+            uid: milestone['id'].toString(),
+            url: milestone['html_url'].toString(),
+            transparency: ITimeTransparency.TRANSPARENT,
+          ),
         );
       }
       request.response
