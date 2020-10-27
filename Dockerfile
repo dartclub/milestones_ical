@@ -1,6 +1,19 @@
-FROM google/dart-runtime
+FROM google/dart AS dart-runtime
 
-### NOTE: Uncomment the following lines for local testing:
-#ADD key.json /project/key.json
-#ENV GCLOUD_KEY /project/key.json
-#ENV GCLOUD_PROJECT dartlang-pub
+WORKDIR /app
+
+ADD pubspec.* /app/
+RUN pub get
+ADD bin /app/bin/
+ADD lib /app/lib/
+RUN pub get --offline
+RUN dart2native /app/bin/server.dart -o /app/server
+
+FROM frolvlad/alpine-glibc:alpine-3.9_glibc-2.29
+
+COPY --from=dart-runtime /app/server /server
+
+CMD []
+ENTRYPOINT ["/server"]
+
+EXPOSE 8080

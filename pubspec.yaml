@@ -2,6 +2,6 @@ name: milestones_ical
 version: 0.1.0
 
 dependencies:
-  appengine: ^0.6.1
   http: ^0.12.0+1
-  ical_serializer: ^0.0.1
+  ical: ^0.1.3
+

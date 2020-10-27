@@ -1,4 +1,4 @@
-import 'package:ical_serializer/ical_serializer.dart';
+import 'package:ical/serializer.dart';
 import 'package:milestones_ical/router.dart';
 import 'dart:io';
 
@@ -197,8 +197,9 @@ class PushupCalendar {
       date = date.add(training["diff"]);
       String description =
           '${training["rest"].inSeconds}s rest time in between the sets.\nSets:\n- ';
-      description += training["sets"][startCount].join(' repeats\n- ') + ' minimum repeats';
-      String summary = 'Push-Ups: (${raw.indexOf(training)+1}/${raw.length})';
+      description += training["sets"][startCount].join(' repeats\n- ') +
+          ' minimum repeats';
+      String summary = 'Push-Ups: (${raw.indexOf(training) + 1}/${raw.length})';
 
       calendar.addElement(IEvent(
         start: date,

@@ -1,4 +1,4 @@
-import 'package:ical_serializer/ical_serializer.dart';
+import 'package:ical/serializer.dart';
 import 'package:milestones_ical/router.dart';
 import 'dart:io';
 import 'dart:convert';
