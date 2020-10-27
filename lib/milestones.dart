@@ -29,6 +29,8 @@ Future<void> milestonesHandler(HttpRequest request) async {
               description: milestone['description'].toString(),
               comment: comment,
               summary: title,
+              status: IEventStatus.CONFIRMED,
+              classification: IClass.PUBLIC,
               uid: milestone['id'].toString(),
               url: milestone['html_url'].toString()),
         );
