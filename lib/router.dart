@@ -7,13 +7,16 @@ final Map<String, Route> routes = {
   '/': (HttpRequest request) async {
     request.response
       ..write('''
-          try:
-          Github repository milestones feed
-            /milestones/:owner/:repo
-          
-          100 Push-ups calendar feed
-            /pushups/YYYY-MM-DD/<number of pushups>
-        ''')
+try:
+\tMilestones for a public github repository
+\t\t/milestones/:owner/:repo.ics
+
+\t100 Push-ups calendar feed
+\t\t/pushups/:date/:number
+\t\t you have to start with an evaluation test to see how many push-ups you can do
+\t\t the first argument ist the date of your test, formatted like this: YYYY-MM-DD.
+\t\t the second argument is the number of push-ups you can do.
+''')
       ..close();
   },
   '/pushups': pushupsHandler,

@@ -243,9 +243,14 @@ class PushupCalendar {
 }
 
 Future<void> pushupsHandler(HttpRequest request) async {
-  List<String> parameters = request.requestedUri.path.substring(1).split('/');
+  List<String> parameters = request.requestedUri.pathSegments;
+
   if (parameters.length == 3) {
-    PushupCalendar cal = PushupCalendar(parameters[1], parameters[2]);
+    var date = parameters[1];
+    var repeats = parameters.last.endsWith('.ics')
+        ? parameters.last.substring(0, parameters.last.length - 4)
+        : parameters.last;
+    PushupCalendar cal = PushupCalendar(date, repeats);
     cal.compose();
     request.response
       ..headers.contentType = ContentType('text', 'calendar')

@@ -5,11 +5,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<void> milestonesHandler(HttpRequest request) async {
-  List<String> parameters = request.requestedUri.path.substring(1).split('/');
+  List<String> parameters = request.uri.pathSegments;
+
   if (parameters.length == 3) {
-    // https://api.github.com/repos/:user/:repo/milestones
-    var url =
-        'https://api.github.com/repos/${parameters[1]}/${parameters[2]}/milestones';
+    var user = parameters[1];
+    var repo = parameters.last.endsWith('.ics')
+        ? parameters.last.substring(0, parameters.last.length - 4)
+        : parameters.last;
+
+    var url = 'https://api.github.com/repos/$user/$repo/milestones';
     var milestones = await http.get(url);
     if (milestones.statusCode == 200) {
       var jsonMilestones = json.decode(milestones.body);
